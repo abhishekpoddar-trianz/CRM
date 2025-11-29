@@ -17,7 +17,7 @@ import jakarta.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -34,7 +34,8 @@ public class User {
 
     private String password;
 
-    private int enabled;
+    @Column(columnDefinition = "BOOLEAN DEFAULT true")
+    private boolean enabled;
 
     @ManyToOne
     private Role role;
@@ -43,7 +44,7 @@ public class User {
         return getClass().getDeclaredFields().length;
     }
 
-    public int getRole_id() {
+    public Long getRole_id() {
         return role.getId();
     }
 

@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Iterable<User> listAllUsers() {
-        return userRepository.findAllByEnabled(1);
+        return userRepository.findAllByEnabled(true);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
     public void saveUser(User user) {
         Role userRole = roleRepository.findByName("ROLE_USER");
         user.setRole(userRole);
-        user.setEnabled(1);
+        user.setEnabled(true);
         String password = user.getPassword();
         user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);
@@ -92,14 +92,14 @@ public class UserServiceImpl implements UserService {
             userRole = roleRepository.findByName("ROLE_USER");
         } finally {
             user.setRole(userRole);
-            user.setEnabled(1);
+            user.setEnabled(true);
             userRepository.save(user);
         }
     }
 
     @Override
     public void deleteUser(User user) {
-        user.setEnabled(0);
+        user.setEnabled(false);
         user.setPassword(null);
         userRepository.save(user);
     }
