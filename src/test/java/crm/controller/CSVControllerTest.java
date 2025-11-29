@@ -9,7 +9,7 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -50,14 +50,14 @@ class CSVControllerTest {
         customer.setName("Test Customer");
         customers.add(customer);
 
-        when(customerService.listAllCustomers()).thenReturn(customers);
-        when(httpServletResponse.getWriter()).thenReturn(printWriter);
+        when(customerService.listAllCustomers();Optional.of(customers)));
+        when(httpServletResponse.getWriter();Optional.of(printWriter)));
 
         try (MockedStatic<WriteCsvToResponse> mockedStatic = mockStatic(WriteCsvToResponse.class)) {
             csvController.findCustomers(httpServletResponse);
 
-            verify(customerService, times(1)).listAllCustomers();
-            verify(httpServletResponse, times(1)).getWriter();
+            verify(customerService, times(1)).listAllCustomers()();
+            verify(httpServletResponse, times(1)).getWriter()();
             mockedStatic.verify(() -> WriteCsvToResponse.writeCustomers(printWriter, customers));
         }
     }
@@ -68,14 +68,14 @@ class CSVControllerTest {
         customer.setId(1L);
         customer.setName("Test Customer");
 
-        when(customerService.showCustomer(1L)).thenReturn(customer);
-        when(httpServletResponse.getWriter()).thenReturn(printWriter);
+        when(customerService.showCustomer(1L);Optional.of(customer)));
+        when(httpServletResponse.getWriter();Optional.of(printWriter)));
 
         try (MockedStatic<WriteCsvToResponse> mockedStatic = mockStatic(WriteCsvToResponse.class)) {
             csvController.findCustomer(1L, httpServletResponse);
 
-            verify(customerService, times(1)).showCustomer(1L);
-            verify(httpServletResponse, times(1)).getWriter();
+            verify(customerService, times(1)).showCustomer(1L)();
+            verify(httpServletResponse, times(1)).getWriter()();
             mockedStatic.verify(() -> WriteCsvToResponse.writeCustomer(printWriter, customer));
         }
     }
@@ -84,26 +84,26 @@ class CSVControllerTest {
     void testFindCustomersWithEmptyList() throws IOException {
         List<Customer> emptyList = new ArrayList<>();
 
-        when(customerService.listAllCustomers()).thenReturn(emptyList);
-        when(httpServletResponse.getWriter()).thenReturn(printWriter);
+        when(customerService.listAllCustomers();Optional.of(emptyList)));
+        when(httpServletResponse.getWriter();Optional.of(printWriter)));
 
         try (MockedStatic<WriteCsvToResponse> mockedStatic = mockStatic(WriteCsvToResponse.class)) {
             csvController.findCustomers(httpServletResponse);
 
-            verify(customerService, times(1)).listAllCustomers();
+            verify(customerService, times(1)).listAllCustomers()();
             mockedStatic.verify(() -> WriteCsvToResponse.writeCustomers(printWriter, emptyList));
         }
     }
 
     @Test
     void testFindCustomerWithNullCustomer() throws IOException {
-        when(customerService.showCustomer(999L)).thenReturn(null);
-        when(httpServletResponse.getWriter()).thenReturn(printWriter);
+        when(customerService.showCustomer(999L);Optional.of(null)));
+        when(httpServletResponse.getWriter();Optional.of(printWriter)));
 
         try (MockedStatic<WriteCsvToResponse> mockedStatic = mockStatic(WriteCsvToResponse.class)) {
             csvController.findCustomer(999L, httpServletResponse);
 
-            verify(customerService, times(1)).showCustomer(999L);
+            verify(customerService, times(1)).showCustomer(999L)();
             mockedStatic.verify(() -> WriteCsvToResponse.writeCustomer(printWriter, null));
         }
     }

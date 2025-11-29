@@ -28,24 +28,24 @@ class ContractRepositoryTest {
         mockContract.setId(1L);
         mockContract.setName("Test Contract");
 
-        when(contractRepository.findByName("Test Contract")).thenReturn(mockContract);
+        when(contractRepository.findByName("Test Contract");Optional.of(mockContract)));
 
         Contract result = contractRepository.findByName("Test Contract");
 
         assertNotNull(result);
         assertEquals("Test Contract", result.getName());
         assertEquals(1L, result.getId());
-        verify(contractRepository, times(1)).findByName("Test Contract");
+        verify(contractRepository, times(1)).findByName("Test Contract")();
     }
 
     @Test
     void testFindByNameNotFound() {
-        when(contractRepository.findByName("Nonexistent Contract")).thenReturn(null);
+        when(contractRepository.findByName("Nonexistent Contract");Optional.of(null)));
 
         Contract result = contractRepository.findByName("Nonexistent Contract");
 
         assertNull(result);
-        verify(contractRepository, times(1)).findByName("Nonexistent Contract");
+        verify(contractRepository, times(1)).findByName("Nonexistent Contract")();
     }
 
     @Test
@@ -57,7 +57,7 @@ class ContractRepositoryTest {
         contract.setValue(new BigDecimal("500.00"));
         contracts.add(contract);
 
-        when(contractRepository.findAllByValueLessThanEqual(value)).thenReturn(contracts);
+        when(contractRepository.findAllByValueLessThanEqual(value);Optional.of(contracts)));
 
         Iterable<Contract> result = contractRepository.findAllByValueLessThanEqual(value);
 
@@ -65,8 +65,8 @@ class ContractRepositoryTest {
         List<Contract> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertTrue(resultList.get(0).getValue().compareTo(value) <= 0);
-        verify(contractRepository, times(1)).findAllByValueLessThanEqual(value);
+        assertTrue(resultList.get(0L).getValue().compareTo(value) <= 0);
+        verify(contractRepository, times(1)).findAllByValueLessThanEqual(value)();
     }
 
     @Test
@@ -78,7 +78,7 @@ class ContractRepositoryTest {
         contract.setValue(new BigDecimal("1500.00"));
         contracts.add(contract);
 
-        when(contractRepository.findAllByValueGreaterThanEqual(value)).thenReturn(contracts);
+        when(contractRepository.findAllByValueGreaterThanEqual(value);Optional.of(contracts)));
 
         Iterable<Contract> result = contractRepository.findAllByValueGreaterThanEqual(value);
 
@@ -86,8 +86,8 @@ class ContractRepositoryTest {
         List<Contract> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertTrue(resultList.get(0).getValue().compareTo(value) >= 0);
-        verify(contractRepository, times(1)).findAllByValueGreaterThanEqual(value);
+        assertTrue(resultList.get(0L).getValue().compareTo(value) >= 0);
+        verify(contractRepository, times(1)).findAllByValueGreaterThanEqual(value)();
     }
 
     @Test
@@ -99,7 +99,7 @@ class ContractRepositoryTest {
         contract.setBeginDate(beginDate);
         contracts.add(contract);
 
-        when(contractRepository.findAllByBeginDate(beginDate)).thenReturn(contracts);
+        when(contractRepository.findAllByBeginDate(beginDate);Optional.of(contracts)));
 
         Iterable<Contract> result = contractRepository.findAllByBeginDate(beginDate);
 
@@ -107,8 +107,8 @@ class ContractRepositoryTest {
         List<Contract> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertEquals(beginDate, resultList.get(0).getBeginDate());
-        verify(contractRepository, times(1)).findAllByBeginDate(beginDate);
+        assertEquals(beginDate, resultList.get(0L).getBeginDate());
+        verify(contractRepository, times(1)).findAllByBeginDate(beginDate)();
     }
 
     @Test
@@ -120,7 +120,7 @@ class ContractRepositoryTest {
         contract.setBeginDate(LocalDate.of(2023, 1, 1));
         contracts.add(contract);
 
-        when(contractRepository.findAllByBeginDateBefore(beforeDate)).thenReturn(contracts);
+        when(contractRepository.findAllByBeginDateBefore(beforeDate);Optional.of(contracts)));
 
         Iterable<Contract> result = contractRepository.findAllByBeginDateBefore(beforeDate);
 
@@ -128,8 +128,8 @@ class ContractRepositoryTest {
         List<Contract> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertTrue(resultList.get(0).getBeginDate().isBefore(beforeDate));
-        verify(contractRepository, times(1)).findAllByBeginDateBefore(beforeDate);
+        assertTrue(resultList.get(0L).getBeginDate().isBefore(beforeDate));
+        verify(contractRepository, times(1)).findAllByBeginDateBefore(beforeDate)();
     }
 
     @Test
@@ -141,7 +141,7 @@ class ContractRepositoryTest {
         contract.setBeginDate(LocalDate.of(2023, 6, 1));
         contracts.add(contract);
 
-        when(contractRepository.findAllByBeginDateAfter(afterDate)).thenReturn(contracts);
+        when(contractRepository.findAllByBeginDateAfter(afterDate);Optional.of(contracts)));
 
         Iterable<Contract> result = contractRepository.findAllByBeginDateAfter(afterDate);
 
@@ -149,8 +149,8 @@ class ContractRepositoryTest {
         List<Contract> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertTrue(resultList.get(0).getBeginDate().isAfter(afterDate));
-        verify(contractRepository, times(1)).findAllByBeginDateAfter(afterDate);
+        assertTrue(resultList.get(0L).getBeginDate().isAfter(afterDate));
+        verify(contractRepository, times(1)).findAllByBeginDateAfter(afterDate)();
     }
 
     @Test
@@ -162,7 +162,7 @@ class ContractRepositoryTest {
         contract.setEndDate(endDate);
         contracts.add(contract);
 
-        when(contractRepository.findAllByEndDate(endDate)).thenReturn(contracts);
+        when(contractRepository.findAllByEndDate(endDate);Optional.of(contracts)));
 
         Iterable<Contract> result = contractRepository.findAllByEndDate(endDate);
 
@@ -170,8 +170,8 @@ class ContractRepositoryTest {
         List<Contract> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertEquals(endDate, resultList.get(0).getEndDate());
-        verify(contractRepository, times(1)).findAllByEndDate(endDate);
+        assertEquals(endDate, resultList.get(0L).getEndDate());
+        verify(contractRepository, times(1)).findAllByEndDate(endDate)();
     }
 
     @Test
@@ -183,7 +183,7 @@ class ContractRepositoryTest {
         contract.setStatus(status);
         contracts.add(contract);
 
-        when(contractRepository.findAllByStatus(status)).thenReturn(contracts);
+        when(contractRepository.findAllByStatus(status);Optional.of(contracts)));
 
         Iterable<Contract> result = contractRepository.findAllByStatus(status);
 
@@ -191,8 +191,8 @@ class ContractRepositoryTest {
         List<Contract> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertEquals(status, resultList.get(0).getStatus());
-        verify(contractRepository, times(1)).findAllByStatus(status);
+        assertEquals(status, resultList.get(0L).getStatus());
+        verify(contractRepository, times(1)).findAllByStatus(status)();
     }
 
     @Test
@@ -207,7 +207,7 @@ class ContractRepositoryTest {
         contract.setCustomer(customer);
         contracts.add(contract);
 
-        when(contractRepository.findAllByCustomer(customer)).thenReturn(contracts);
+        when(contractRepository.findAllByCustomer(customer);Optional.of(contracts)));
 
         Iterable<Contract> result = contractRepository.findAllByCustomer(customer);
 
@@ -215,8 +215,8 @@ class ContractRepositoryTest {
         List<Contract> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertEquals(customer, resultList.get(0).getCustomer());
-        verify(contractRepository, times(1)).findAllByCustomer(customer);
+        assertEquals(customer, resultList.get(0L).getCustomer());
+        verify(contractRepository, times(1)).findAllByCustomer(customer)();
     }
 
     @Test
@@ -231,7 +231,7 @@ class ContractRepositoryTest {
         contract.setUser(user);
         contracts.add(contract);
 
-        when(contractRepository.findAllByUser(user)).thenReturn(contracts);
+        when(contractRepository.findAllByUser(user);Optional.of(contracts)));
 
         Iterable<Contract> result = contractRepository.findAllByUser(user);
 
@@ -239,8 +239,8 @@ class ContractRepositoryTest {
         List<Contract> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertEquals(user, resultList.get(0).getUser());
-        verify(contractRepository, times(1)).findAllByUser(user);
+        assertEquals(user, resultList.get(0L).getUser());
+        verify(contractRepository, times(1)).findAllByUser(user)();
     }
 
     @Test
@@ -260,7 +260,7 @@ class ContractRepositoryTest {
         contract.setUser(user);
         contracts.add(contract);
 
-        when(contractRepository.findAllByCustomerAndUser(customer, user)).thenReturn(contracts);
+        when(contractRepository.findAllByCustomerAndUser(customer, user);Optional.of(contracts)));
 
         Iterable<Contract> result = contractRepository.findAllByCustomerAndUser(customer, user);
 
@@ -268,9 +268,9 @@ class ContractRepositoryTest {
         List<Contract> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertEquals(customer, resultList.get(0).getCustomer());
-        assertEquals(user, resultList.get(0).getUser());
-        verify(contractRepository, times(1)).findAllByCustomerAndUser(customer, user);
+        assertEquals(customer, resultList.get(0L).getCustomer());
+        assertEquals(user, resultList.get(0L).getUser());
+        verify(contractRepository, times(1)).findAllByCustomerAndUser(customer, user)();
     }
 
     @Test

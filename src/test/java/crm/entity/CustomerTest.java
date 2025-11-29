@@ -30,12 +30,12 @@ class CustomerTest {
                 .id(1L)
                 .name("Test Customer")
                 .email("customer@test.com")
-                .phone(123456789)
+                .phone(123456789L)
                 .firstName("John")
                 .lastName("Doe")
                 .city("New York")
                 .address("123 Main St")
-                .enabled(1)
+                .enabled(1L)
                 .categories(categories)
                 .build();
 
@@ -65,12 +65,12 @@ class CustomerTest {
         customer.setId(1L);
         customer.setName("Test Customer");
         customer.setEmail("test@test.com");
-        customer.setPhone(123456789);
+        customer.setPhone(123456789L);
         customer.setFirstName("John");
         customer.setLastName("Doe");
         customer.setCity("New York");
         customer.setAddress("123 Main St");
-        customer.setEnabled(1);
+        customer.setEnabled(1L);
         customer.setCategories(categories);
 
         assertEquals(1L, customer.getId());
@@ -89,11 +89,11 @@ class CustomerTest {
     void testCategoriesManagement() {
         Set<Category> categories = new HashSet<>();
         Category category1 = new Category();
-        category1.setId(1);
+        category1.setId(1L);
         category1.setName("Premium");
 
         Category category2 = new Category();
-        category2.setId(2);
+        category2.setId(2L);
         category2.setName("Gold");
 
         categories.add(category1);

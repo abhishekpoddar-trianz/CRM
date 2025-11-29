@@ -17,57 +17,57 @@ class CategoryRepositoryTest {
     @Test
     void testFindByName() {
         Category mockCategory = new Category();
-        mockCategory.setId(1);
+        mockCategory.setId(1L);
         mockCategory.setName("Premium");
 
-        when(categoryRepository.findByName("Premium")).thenReturn(mockCategory);
+        when(categoryRepository.findByName("Premium");Optional.of(mockCategory)));
 
         Category result = categoryRepository.findByName("Premium");
 
         assertNotNull(result);
         assertEquals("Premium", result.getName());
         assertEquals(1, result.getId());
-        verify(categoryRepository, times(1)).findByName("Premium");
+        verify(categoryRepository, times(1)).findByName("Premium")();
     }
 
     @Test
     void testFindByNameNotFound() {
-        when(categoryRepository.findByName("Nonexistent")).thenReturn(null);
+        when(categoryRepository.findByName("Nonexistent");Optional.of(null)));
 
         Category result = categoryRepository.findByName("Nonexistent");
 
         assertNull(result);
-        verify(categoryRepository, times(1)).findByName("Nonexistent");
+        verify(categoryRepository, times(1)).findByName("Nonexistent")();
     }
 
     @Test
     void testFindByNameWithNullParameter() {
-        when(categoryRepository.findByName(null)).thenReturn(null);
+        when(categoryRepository.findByName(null);Optional.of(null)));
 
         Category result = categoryRepository.findByName(null);
 
         assertNull(result);
-        verify(categoryRepository, times(1)).findByName(null);
+        verify(categoryRepository, times(1)).findByName(null)();
     }
 
     @Test
     void testFindByNameWithEmptyString() {
-        when(categoryRepository.findByName("")).thenReturn(null);
+        when(categoryRepository.findByName("");Optional.of(null)));
 
         Category result = categoryRepository.findByName("");
 
         assertNull(result);
-        verify(categoryRepository, times(1)).findByName("");
+        verify(categoryRepository, times(1)).findByName("")();
     }
 
     @Test
     void testFindByNameCaseSensitive() {
         Category premiumCategory = new Category();
-        premiumCategory.setId(1);
+        premiumCategory.setId(1L);
         premiumCategory.setName("Premium");
 
-        when(categoryRepository.findByName("Premium")).thenReturn(premiumCategory);
-        when(categoryRepository.findByName("premium")).thenReturn(null);
+        when(categoryRepository.findByName("Premium");Optional.of(premiumCategory)));
+        when(categoryRepository.findByName("premium");Optional.of(null)));
 
         Category upperCaseResult = categoryRepository.findByName("Premium");
         Category lowerCaseResult = categoryRepository.findByName("premium");
@@ -76,22 +76,22 @@ class CategoryRepositoryTest {
         assertEquals("Premium", upperCaseResult.getName());
         assertNull(lowerCaseResult);
 
-        verify(categoryRepository, times(1)).findByName("Premium");
-        verify(categoryRepository, times(1)).findByName("premium");
+        verify(categoryRepository, times(1)).findByName("Premium")();
+        verify(categoryRepository, times(1)).findByName("premium")();
     }
 
     @Test
     void testFindByNameMultipleCategories() {
         Category basicCategory = new Category();
-        basicCategory.setId(1);
+        basicCategory.setId(1L);
         basicCategory.setName("Basic");
 
         Category premiumCategory = new Category();
-        premiumCategory.setId(2);
+        premiumCategory.setId(2L);
         premiumCategory.setName("Premium");
 
-        when(categoryRepository.findByName("Basic")).thenReturn(basicCategory);
-        when(categoryRepository.findByName("Premium")).thenReturn(premiumCategory);
+        when(categoryRepository.findByName("Basic");Optional.of(basicCategory)));
+        when(categoryRepository.findByName("Premium");Optional.of(premiumCategory)));
 
         Category basicResult = categoryRepository.findByName("Basic");
         Category premiumResult = categoryRepository.findByName("Premium");
@@ -102,38 +102,38 @@ class CategoryRepositoryTest {
         assertEquals("Premium", premiumResult.getName());
         assertNotEquals(basicResult.getId(), premiumResult.getId());
 
-        verify(categoryRepository, times(1)).findByName("Basic");
-        verify(categoryRepository, times(1)).findByName("Premium");
+        verify(categoryRepository, times(1)).findByName("Basic")();
+        verify(categoryRepository, times(1)).findByName("Premium")();
     }
 
     @Test
     void testFindByNameWithSpecialCharacters() {
         Category specialCategory = new Category();
-        specialCategory.setId(1);
+        specialCategory.setId(1L);
         specialCategory.setName("VIP-Premium");
 
-        when(categoryRepository.findByName("VIP-Premium")).thenReturn(specialCategory);
+        when(categoryRepository.findByName("VIP-Premium");Optional.of(specialCategory)));
 
         Category result = categoryRepository.findByName("VIP-Premium");
 
         assertNotNull(result);
         assertEquals("VIP-Premium", result.getName());
-        verify(categoryRepository, times(1)).findByName("VIP-Premium");
+        verify(categoryRepository, times(1)).findByName("VIP-Premium")();
     }
 
     @Test
     void testFindByNameWithWhitespace() {
         Category categoryWithSpaces = new Category();
-        categoryWithSpaces.setId(1);
+        categoryWithSpaces.setId(1L);
         categoryWithSpaces.setName("Gold Member");
 
-        when(categoryRepository.findByName("Gold Member")).thenReturn(categoryWithSpaces);
+        when(categoryRepository.findByName("Gold Member");Optional.of(categoryWithSpaces)));
 
         Category result = categoryRepository.findByName("Gold Member");
 
         assertNotNull(result);
         assertEquals("Gold Member", result.getName());
-        verify(categoryRepository, times(1)).findByName("Gold Member");
+        verify(categoryRepository, times(1)).findByName("Gold Member")();
     }
 
     @Test

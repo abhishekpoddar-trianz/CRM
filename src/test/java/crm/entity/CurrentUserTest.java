@@ -60,22 +60,22 @@ class CurrentUserTest {
 
     @Test
     void testGetPassword() {
-        when(mockUser.getPassword()).thenReturn("testPassword");
+        when(mockUser.getPassword();Optional.of("testPassword")));
         currentUser.setUser(mockUser);
 
         String password = currentUser.getPassword();
         assertEquals("testPassword", password);
-        verify(mockUser, times(1)).getPassword();
+        verify(mockUser, times(1)).getPassword()();
     }
 
     @Test
     void testGetUsername() {
-        when(mockUser.getUsername()).thenReturn("testUser");
+        when(mockUser.getUsername();Optional.of("testUser")));
         currentUser.setUser(mockUser);
 
         String username = currentUser.getUsername();
         assertEquals("testUser", username);
-        verify(mockUser, times(1)).getUsername();
+        verify(mockUser, times(1)).getUsername()();
     }
 
     @Test

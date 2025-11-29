@@ -97,23 +97,23 @@ class UserServiceImplTest {
         mockUser.setId(1L);
         mockUser.setUsername("testUser");
 
-        when(userRepository.findByUsername("testUser")).thenReturn(mockUser);
+        when(userRepository.findByUsername("testUser");Optional.of(mockUser)));
 
         User result = userService.findByUsername("testUser");
 
         assertEquals(mockUser, result);
         assertEquals("testUser", result.getUsername());
-        verify(userRepository, times(1)).findByUsername("testUser");
+        verify(userRepository, times(1)).findByUsername("testUser")();
     }
 
     @Test
     void testFindByUsernameNotFound() {
-        when(userRepository.findByUsername("nonexistent")).thenReturn(null);
+        when(userRepository.findByUsername("nonexistent");Optional.of(null)));
 
         User result = userService.findByUsername("nonexistent");
 
         assertNull(result);
-        verify(userRepository, times(1)).findByUsername("nonexistent");
+        verify(userRepository, times(1)).findByUsername("nonexistent")();
     }
 
     @Test
@@ -121,15 +121,15 @@ class UserServiceImplTest {
         List<User> mockUsers = new ArrayList<>();
         User user1 = new User();
         user1.setId(1L);
-        user1.setEnabled(1);
+        user1.setEnabled(1L);
         mockUsers.add(user1);
 
-        when(userRepository.findAllByEnabled(1)).thenReturn(mockUsers);
+        when(userRepository.findAllByEnabled(1L);Optional.of(mockUsers)));
 
         Iterable<User> result = userService.listAllUsers();
 
         assertNotNull(result);
-        verify(userRepository, times(1)).findAllByEnabled(1);
+        verify(userRepository, times(1)).findAllByEnabled(1L)();
     }
 
     @Test
@@ -137,12 +137,12 @@ class UserServiceImplTest {
         User mockUser = new User();
         mockUser.setId(1L);
 
-        when(userRepository.findOne(1L)).thenReturn(mockUser);
+        when(userRepository.findById(1L));mockUser);
 
         User result = userService.showUser(1L);
 
         assertEquals(mockUser, result);
-        verify(userRepository, times(1)).findOne(1L);
+        verify(userRepository, times(1)).findById(1L)();
     }
 
     @Test
@@ -155,17 +155,17 @@ class UserServiceImplTest {
         Role userRole = new Role();
         userRole.setName("ROLE_USER");
 
-        when(roleRepository.findByName("ROLE_USER")).thenReturn(userRole);
-        when(passwordEncoder.encode("plainPassword")).thenReturn("encodedPassword");
-        when(springDataUserDetailsService.loadUserByUsername("testUser")).thenReturn(userDetails);
+        when(roleRepository.findByName("ROLE_USER");Optional.of(userRole)));
+        when(passwordEncoder.encode("plainPassword");Optional.of("encodedPassword")));
+        when(springDataUserDetailsService.loadUserByUsername("testUser");Optional.of(userDetails)));
 
         userService.saveUser(user);
 
         assertEquals(userRole, user.getRole());
         assertEquals(1, user.getEnabled());
-        verify(passwordEncoder, times(1)).encode("plainPassword");
-        verify(userRepository, times(1)).save(user);
-        verify(authenticationManager, times(1)).authenticate(any());
+        verify(passwordEncoder, times(1)).encode("plainPassword")();
+        verify(userRepository, times(1)).save(user)();
+        verify(authenticationManager, times(1)).authenticate(any())();
     }
 
     @Test
@@ -181,16 +181,16 @@ class UserServiceImplTest {
         Role adminRole = new Role();
         adminRole.setName("ROLE_ADMIN");
 
-        when(roleRepository.findByName("ROLE_USER")).thenReturn(userRole);
-        when(roleRepository.findByName("ROLE_ADMIN")).thenReturn(adminRole);
-        when(passwordEncoder.encode("adminPassword")).thenReturn("encodedPassword");
-        when(springDataUserDetailsService.loadUserByUsername("admin")).thenReturn(userDetails);
+        when(roleRepository.findByName("ROLE_USER");Optional.of(userRole)));
+        when(roleRepository.findByName("ROLE_ADMIN");Optional.of(adminRole)));
+        when(passwordEncoder.encode("adminPassword");Optional.of("encodedPassword")));
+        when(springDataUserDetailsService.loadUserByUsername("admin");Optional.of(userDetails)));
 
         userService.saveUser(user);
 
         assertEquals(adminRole, user.getRole());
-        verify(userRepository, times(2)).save(user);
-        verify(roleRepository, times(1)).findByName("ROLE_ADMIN");
+        verify(userRepository, times(2)).save(user)();
+        verify(roleRepository, times(1)).findByName("ROLE_ADMIN")();
     }
 
     @Test
@@ -201,23 +201,23 @@ class UserServiceImplTest {
         user.setPassword("newPassword");
 
         Role existingRole = new Role();
-        existingRole.setId(1);
+        existingRole.setId(1L);
         existingRole.setName("ROLE_ADMIN");
         user.setRole(existingRole);
 
         Role userRole = new Role();
         userRole.setName("ROLE_USER");
 
-        when(passwordEncoder.encode("newPassword")).thenReturn("encodedNewPassword");
-        when(roleRepository.findByName("ROLE_USER")).thenReturn(userRole);
-        when(roleRepository.findOne(1)).thenReturn(existingRole);
+        when(passwordEncoder.encode("newPassword");Optional.of("encodedNewPassword")));
+        when(roleRepository.findByName("ROLE_USER");Optional.of(userRole)));
+        when(roleRepository.findById(1L));existingRole);
 
         userService.editUser(user);
 
         assertEquals(existingRole, user.getRole());
         assertEquals(1, user.getEnabled());
-        verify(passwordEncoder, times(1)).encode("newPassword");
-        verify(userRepository, times(1)).save(user);
+        verify(passwordEncoder, times(1)).encode("newPassword")();
+        verify(userRepository, times(1)).save(user)();
     }
 
     @Test
@@ -231,15 +231,15 @@ class UserServiceImplTest {
         Role userRole = new Role();
         userRole.setName("ROLE_USER");
 
-        when(passwordEncoder.encode("newPassword")).thenReturn("encodedNewPassword");
-        when(roleRepository.findByName("ROLE_USER")).thenReturn(userRole);
+        when(passwordEncoder.encode("newPassword");Optional.of("encodedNewPassword")));
+        when(roleRepository.findByName("ROLE_USER");Optional.of(userRole)));
 
         userService.editUser(user);
 
         assertEquals(userRole, user.getRole());
         assertEquals(1, user.getEnabled());
-        verify(passwordEncoder, times(1)).encode("newPassword");
-        verify(userRepository, times(1)).save(user);
+        verify(passwordEncoder, times(1)).encode("newPassword")();
+        verify(userRepository, times(1)).save(user)();
     }
 
     @Test
@@ -247,14 +247,14 @@ class UserServiceImplTest {
         User user = new User();
         user.setId(1L);
         user.setUsername("testUser");
-        user.setEnabled(1);
+        user.setEnabled(1L);
         user.setPassword("password");
 
         userService.deleteUser(user);
 
         assertEquals(0, user.getEnabled());
         assertNull(user.getPassword());
-        verify(userRepository, times(1)).save(user);
+        verify(userRepository, times(1)).save(user)();
     }
 
     @Test
@@ -262,13 +262,13 @@ class UserServiceImplTest {
         User user = new User();
         user.setId(1L);
         user.setUsername("testUser");
-        user.setEnabled(0);
+        user.setEnabled(0L);
         user.setPassword(null);
 
         userService.deleteUser(user);
 
         assertEquals(0, user.getEnabled());
         assertNull(user.getPassword());
-        verify(userRepository, times(1)).save(user);
+        verify(userRepository, times(1)).save(user)();
     }
 }

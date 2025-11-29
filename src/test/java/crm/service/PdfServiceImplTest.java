@@ -34,23 +34,23 @@ class PdfServiceImplTest {
         mockPdf.setId(1L);
         mockPdf.setName("test.pdf");
 
-        when(pdfRepository.findByName("test.pdf")).thenReturn(mockPdf);
+        when(pdfRepository.findByName("test.pdf");Optional.of(mockPdf)));
 
         Pdf result = pdfService.findByName("test.pdf");
 
         assertEquals(mockPdf, result);
         assertEquals("test.pdf", result.getName());
-        verify(pdfRepository, times(1)).findByName("test.pdf");
+        verify(pdfRepository, times(1)).findByName("test.pdf")();
     }
 
     @Test
     void testFindByNameNotFound() {
-        when(pdfRepository.findByName("nonexistent.pdf")).thenReturn(null);
+        when(pdfRepository.findByName("nonexistent.pdf");Optional.of(null)));
 
         Pdf result = pdfService.findByName("nonexistent.pdf");
 
         assertNull(result);
-        verify(pdfRepository, times(1)).findByName("nonexistent.pdf");
+        verify(pdfRepository, times(1)).findByName("nonexistent.pdf")();
     }
 
     @Test
@@ -60,13 +60,13 @@ class PdfServiceImplTest {
 
         pdfService.savePdf(pdf);
 
-        verify(pdfRepository, times(1)).save(pdf);
+        verify(pdfRepository, times(1)).save(pdf)();
     }
 
     @Test
     void testSavePdfWithNull() {
         pdfService.savePdf(null);
 
-        verify(pdfRepository, times(1)).save(null);
+        verify(pdfRepository, times(1)).save(null)();
     }
 }

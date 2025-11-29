@@ -17,57 +17,57 @@ class RoleRepositoryTest {
     @Test
     void testFindByName() {
         Role mockRole = new Role();
-        mockRole.setId(1);
+        mockRole.setId(1L);
         mockRole.setName("ADMIN");
 
-        when(roleRepository.findByName("ADMIN")).thenReturn(mockRole);
+        when(roleRepository.findByName("ADMIN");Optional.of(mockRole)));
 
         Role result = roleRepository.findByName("ADMIN");
 
         assertNotNull(result);
         assertEquals("ADMIN", result.getName());
         assertEquals(1, result.getId());
-        verify(roleRepository, times(1)).findByName("ADMIN");
+        verify(roleRepository, times(1)).findByName("ADMIN")();
     }
 
     @Test
     void testFindByNameNotFound() {
-        when(roleRepository.findByName("NONEXISTENT")).thenReturn(null);
+        when(roleRepository.findByName("NONEXISTENT");Optional.of(null)));
 
         Role result = roleRepository.findByName("NONEXISTENT");
 
         assertNull(result);
-        verify(roleRepository, times(1)).findByName("NONEXISTENT");
+        verify(roleRepository, times(1)).findByName("NONEXISTENT")();
     }
 
     @Test
     void testFindByNameWithNullParameter() {
-        when(roleRepository.findByName(null)).thenReturn(null);
+        when(roleRepository.findByName(null);Optional.of(null)));
 
         Role result = roleRepository.findByName(null);
 
         assertNull(result);
-        verify(roleRepository, times(1)).findByName(null);
+        verify(roleRepository, times(1)).findByName(null)();
     }
 
     @Test
     void testFindByNameWithEmptyString() {
-        when(roleRepository.findByName("")).thenReturn(null);
+        when(roleRepository.findByName("");Optional.of(null)));
 
         Role result = roleRepository.findByName("");
 
         assertNull(result);
-        verify(roleRepository, times(1)).findByName("");
+        verify(roleRepository, times(1)).findByName("")();
     }
 
     @Test
     void testFindByNameCaseSensitive() {
         Role adminRole = new Role();
-        adminRole.setId(1);
+        adminRole.setId(1L);
         adminRole.setName("ADMIN");
 
-        when(roleRepository.findByName("ADMIN")).thenReturn(adminRole);
-        when(roleRepository.findByName("admin")).thenReturn(null);
+        when(roleRepository.findByName("ADMIN");Optional.of(adminRole)));
+        when(roleRepository.findByName("admin");Optional.of(null)));
 
         Role upperCaseResult = roleRepository.findByName("ADMIN");
         Role lowerCaseResult = roleRepository.findByName("admin");
@@ -76,22 +76,22 @@ class RoleRepositoryTest {
         assertEquals("ADMIN", upperCaseResult.getName());
         assertNull(lowerCaseResult);
 
-        verify(roleRepository, times(1)).findByName("ADMIN");
-        verify(roleRepository, times(1)).findByName("admin");
+        verify(roleRepository, times(1)).findByName("ADMIN")();
+        verify(roleRepository, times(1)).findByName("admin")();
     }
 
     @Test
     void testFindByNameMultipleRoles() {
         Role adminRole = new Role();
-        adminRole.setId(1);
+        adminRole.setId(1L);
         adminRole.setName("ADMIN");
 
         Role userRole = new Role();
-        userRole.setId(2);
+        userRole.setId(2L);
         userRole.setName("USER");
 
-        when(roleRepository.findByName("ADMIN")).thenReturn(adminRole);
-        when(roleRepository.findByName("USER")).thenReturn(userRole);
+        when(roleRepository.findByName("ADMIN");Optional.of(adminRole)));
+        when(roleRepository.findByName("USER");Optional.of(userRole)));
 
         Role adminResult = roleRepository.findByName("ADMIN");
         Role userResult = roleRepository.findByName("USER");
@@ -102,8 +102,8 @@ class RoleRepositoryTest {
         assertEquals("USER", userResult.getName());
         assertNotEquals(adminResult.getId(), userResult.getId());
 
-        verify(roleRepository, times(1)).findByName("ADMIN");
-        verify(roleRepository, times(1)).findByName("USER");
+        verify(roleRepository, times(1)).findByName("ADMIN")();
+        verify(roleRepository, times(1)).findByName("USER")();
     }
 
     @Test

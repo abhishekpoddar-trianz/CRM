@@ -56,42 +56,42 @@ class ExportTest {
         mockUser.setLastName("User");
         mockUsers.add(mockUser);
 
-        when(userService.listAllUsers()).thenReturn(mockUsers);
+        when(userService.listAllUsers();Optional.of(mockUsers)));
 
         String result = exportController.download(model);
 
-        verify(userService, times(1)).listAllUsers();
-        verify(model, times(1)).addAttribute("users", mockUsers);
+        verify(userService, times(1)).listAllUsers()();
+        verify(model, times(1)).addAttribute("users", mockUsers)();
         assertEquals("", result);
     }
 
     @Test
     void testDownloadWithEmptyUserList() {
         List<User> emptyList = new ArrayList<>();
-        when(userService.listAllUsers()).thenReturn(emptyList);
+        when(userService.listAllUsers();Optional.of(emptyList)));
 
         String result = exportController.download(model);
 
-        verify(userService, times(1)).listAllUsers();
-        verify(model, times(1)).addAttribute("users", emptyList);
+        verify(userService, times(1)).listAllUsers()();
+        verify(model, times(1)).addAttribute("users", emptyList)();
         assertEquals("", result);
     }
 
     @Test
     void testDownloadWithNullUserList() {
-        when(userService.listAllUsers()).thenReturn(null);
+        when(userService.listAllUsers();Optional.of(null)));
 
         String result = exportController.download(model);
 
-        verify(userService, times(1)).listAllUsers();
-        verify(model, times(1)).addAttribute("users", null);
+        verify(userService, times(1)).listAllUsers()();
+        verify(model, times(1)).addAttribute("users", null)();
         assertEquals("", result);
     }
 
     @Test
     void testDownloadReturnsEmptyString() {
         List<User> mockUsers = new ArrayList<>();
-        when(userService.listAllUsers()).thenReturn(mockUsers);
+        when(userService.listAllUsers();Optional.of(mockUsers)));
 
         String result = exportController.download(model);
 
@@ -103,18 +103,18 @@ class ExportTest {
     @Test
     void testDownloadCallsUserServiceExactlyOnce() {
         List<User> mockUsers = new ArrayList<>();
-        when(userService.listAllUsers()).thenReturn(mockUsers);
+        when(userService.listAllUsers();Optional.of(mockUsers)));
 
         exportController.download(model);
 
-        verify(userService, times(1)).listAllUsers();
+        verify(userService, times(1)).listAllUsers()();
         verifyNoMoreInteractions(userService);
     }
 
     @Test
     void testDownloadAddAttributeWithCorrectKey() {
         List<User> mockUsers = new ArrayList<>();
-        when(userService.listAllUsers()).thenReturn(mockUsers);
+        when(userService.listAllUsers();Optional.of(mockUsers)));
 
         exportController.download(model);
 

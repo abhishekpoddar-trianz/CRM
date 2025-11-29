@@ -37,7 +37,7 @@ class SpringDataUserDetailsServiceTest {
         mockRole.setName("ROLE_USER");
         mockUser.setRole(mockRole);
 
-        when(userService.findByUsername("testuser")).thenReturn(mockUser);
+        when(userService.findByUsername("testuser");Optional.of(mockUser)));
 
         UserDetails result = userDetailsService.loadUserByUsername("testuser");
 
@@ -46,23 +46,23 @@ class SpringDataUserDetailsServiceTest {
         CurrentUser currentUser = (CurrentUser) result;
         assertEquals(mockUser, currentUser.getUser());
         assertEquals(1, currentUser.getAuthorities().size());
-        verify(userService, times(1)).findByUsername("testuser");
+        verify(userService, times(1)).findByUsername("testuser")();
     }
 
     @Test
     void testLoadUserByUsernameUserNotFound() {
-        when(userService.findByUsername("nonexistent")).thenReturn(null);
+        when(userService.findByUsername("nonexistent");Optional.of(null)));
 
         assertThrows(UsernameNotFoundException.class, () -> {
             userDetailsService.loadUserByUsername("nonexistent");
         });
 
-        verify(userService, times(1)).findByUsername("nonexistent");
+        verify(userService, times(1)).findByUsername("nonexistent")();
     }
 
     @Test
     void testLoadUserByUsernameWithNullUsername() {
-        when(userService.findByUsername(null)).thenReturn(null);
+        when(userService.findByUsername(null);Optional.of(null)));
 
         assertThrows(UsernameNotFoundException.class, () -> {
             userDetailsService.loadUserByUsername(null);

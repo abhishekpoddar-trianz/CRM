@@ -22,7 +22,7 @@ class CategoryTest {
 
     @Test
     void testGettersAndSetters() {
-        category.setId(1);
+        category.setId(1L);
         category.setName("Premium");
 
         assertEquals(1, category.getId());
@@ -39,11 +39,11 @@ class CategoryTest {
     @Test
     void testEqualsAndHashCode() {
         Category category1 = new Category();
-        category1.setId(1);
+        category1.setId(1L);
         category1.setName("Premium");
 
         Category category2 = new Category();
-        category2.setId(1);
+        category2.setId(1L);
         category2.setName("Premium");
 
         assertEquals(category1, category2);

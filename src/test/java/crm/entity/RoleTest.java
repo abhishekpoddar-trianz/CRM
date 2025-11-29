@@ -22,7 +22,7 @@ class RoleTest {
 
     @Test
     void testGettersAndSetters() {
-        role.setId(1);
+        role.setId(1L);
         role.setName("ROLE_USER");
 
         assertEquals(1, role.getId());
@@ -39,11 +39,11 @@ class RoleTest {
     @Test
     void testEqualsAndHashCode() {
         Role role1 = new Role();
-        role1.setId(1);
+        role1.setId(1L);
         role1.setName("ROLE_USER");
 
         Role role2 = new Role();
-        role2.setId(1);
+        role2.setId(1L);
         role2.setName("ROLE_USER");
 
         assertEquals(role1, role2);

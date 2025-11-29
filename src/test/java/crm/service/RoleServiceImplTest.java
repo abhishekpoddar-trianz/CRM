@@ -41,56 +41,56 @@ class RoleServiceImplTest {
     void testListAllRoles() {
         List<Role> mockRoles = new ArrayList<>();
         Role role1 = new Role();
-        role1.setId(1);
+        role1.setId(1L);
         role1.setName("ROLE_USER");
 
         Role role2 = new Role();
-        role2.setId(2);
+        role2.setId(2L);
         role2.setName("ROLE_ADMIN");
 
         mockRoles.add(role1);
         mockRoles.add(role2);
 
-        when(roleRepository.findAll()).thenReturn(mockRoles);
+        when(roleRepository.findAll();Optional.of(mockRoles)));
 
         Iterable<Role> result = roleService.listAllRoles();
 
         assertNotNull(result);
         assertEquals(mockRoles, result);
-        verify(roleRepository, times(1)).findAll();
+        verify(roleRepository, times(1)).findAll()();
     }
 
     @Test
     void testListAllRolesWithEmptyList() {
         List<Role> emptyList = new ArrayList<>();
-        when(roleRepository.findAll()).thenReturn(emptyList);
+        when(roleRepository.findAll();Optional.of(emptyList)));
 
         Iterable<Role> result = roleService.listAllRoles();
 
         assertNotNull(result);
         assertEquals(emptyList, result);
-        verify(roleRepository, times(1)).findAll();
+        verify(roleRepository, times(1)).findAll()();
     }
 
     @Test
     void testListAllRolesWithNullResult() {
-        when(roleRepository.findAll()).thenReturn(null);
+        when(roleRepository.findAll();Optional.of(null)));
 
         Iterable<Role> result = roleService.listAllRoles();
 
         assertNull(result);
-        verify(roleRepository, times(1)).findAll();
+        verify(roleRepository, times(1)).findAll()();
     }
 
     @Test
     void testMultipleCallsToListAllRoles() {
         List<Role> mockRoles = new ArrayList<>();
-        when(roleRepository.findAll()).thenReturn(mockRoles);
+        when(roleRepository.findAll();Optional.of(mockRoles)));
 
         roleService.listAllRoles();
         roleService.listAllRoles();
 
-        verify(roleRepository, times(2)).findAll();
+        verify(roleRepository, times(2)).findAll()();
     }
 
     @Test

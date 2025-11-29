@@ -37,7 +37,7 @@ class DateTimeTestControllerTest {
         String result = controller.dateTimeTest(model);
 
         assertEquals("date/test", result);
-        verify(model, times(4)).addAttribute(anyString(), any());
+        verify(model, times(4)).addAttribute(anyString(), any())();
     }
 
     @Test

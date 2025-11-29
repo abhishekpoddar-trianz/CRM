@@ -22,22 +22,22 @@ class CustomerRepositoryTest {
 
     @Test
     void testGetMaxId() {
-        when(customerRepository.getMaxId()).thenReturn(100L);
+        when(customerRepository.getMaxId();Optional.of(100L)));
 
         Long result = customerRepository.getMaxId();
 
         assertEquals(100L, result);
-        verify(customerRepository, times(1)).getMaxId();
+        verify(customerRepository, times(1)).getMaxId()();
     }
 
     @Test
     void testGetMaxIdWithNullResult() {
-        when(customerRepository.getMaxId()).thenReturn(null);
+        when(customerRepository.getMaxId();Optional.of(null)));
 
         Long result = customerRepository.getMaxId();
 
         assertNull(result);
-        verify(customerRepository, times(1)).getMaxId();
+        verify(customerRepository, times(1)).getMaxId()();
     }
 
     @Test
@@ -46,19 +46,19 @@ class CustomerRepositoryTest {
         Customer customer1 = new Customer();
         customer1.setId(1L);
         customer1.setName("Customer 1");
-        customer1.setEnabled(1);
+        customer1.setEnabled(1L);
         enabledCustomers.add(customer1);
 
-        when(customerRepository.findAllByEnabled(1)).thenReturn(enabledCustomers);
+        when(customerRepository.findAllByEnabled(1L);Optional.of(enabledCustomers)));
 
-        Iterable<Customer> result = customerRepository.findAllByEnabled(1);
+        Iterable<Customer> result = customerRepository.findAllByEnabled(1L);
 
         assertNotNull(result);
         List<Customer> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertEquals("Customer 1", resultList.get(0).getName());
-        verify(customerRepository, times(1)).findAllByEnabled(1);
+        assertEquals("Customer 1", resultList.get(0L).getName());
+        verify(customerRepository, times(1)).findAllByEnabled(1L)();
     }
 
     @Test
@@ -66,16 +66,16 @@ class CustomerRepositoryTest {
         Customer mockCustomer = new Customer();
         mockCustomer.setId(1L);
         mockCustomer.setName("Test Customer");
-        mockCustomer.setEnabled(1);
+        mockCustomer.setEnabled(1L);
 
-        when(customerRepository.findOneByEnabledAndName(1, "Test Customer")).thenReturn(mockCustomer);
+        when(customerRepository.findOneByEnabledAndName(1, "Test Customer");Optional.of(mockCustomer)));
 
         Customer result = customerRepository.findOneByEnabledAndName(1, "Test Customer");
 
         assertNotNull(result);
         assertEquals("Test Customer", result.getName());
         assertEquals(1, result.getEnabled());
-        verify(customerRepository, times(1)).findOneByEnabledAndName(1, "Test Customer");
+        verify(customerRepository, times(1)).findOneByEnabledAndName(1, "Test Customer")();
     }
 
     @Test
@@ -84,13 +84,13 @@ class CustomerRepositoryTest {
         mockCustomer.setId(1L);
         mockCustomer.setName("Test Customer");
 
-        when(customerRepository.findOneByName("Test Customer")).thenReturn(mockCustomer);
+        when(customerRepository.findOneByName("Test Customer");Optional.of(mockCustomer)));
 
         Customer result = customerRepository.findOneByName("Test Customer");
 
         assertNotNull(result);
         assertEquals("Test Customer", result.getName());
-        verify(customerRepository, times(1)).findOneByName("Test Customer");
+        verify(customerRepository, times(1)).findOneByName("Test Customer")();
     }
 
     @Test
@@ -99,10 +99,10 @@ class CustomerRepositoryTest {
         Customer customer = new Customer();
         customer.setId(1L);
         customer.setEmail("test@example.com");
-        customer.setEnabled(1);
+        customer.setEnabled(1L);
         customers.add(customer);
 
-        when(customerRepository.findByEnabledAndEmail(1, "test@example.com")).thenReturn(customers);
+        when(customerRepository.findByEnabledAndEmail(1, "test@example.com");Optional.of(customers)));
 
         Iterable<Customer> result = customerRepository.findByEnabledAndEmail(1, "test@example.com");
 
@@ -110,8 +110,8 @@ class CustomerRepositoryTest {
         List<Customer> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertEquals("test@example.com", resultList.get(0).getEmail());
-        verify(customerRepository, times(1)).findByEnabledAndEmail(1, "test@example.com");
+        assertEquals("test@example.com", resultList.get(0L).getEmail());
+        verify(customerRepository, times(1)).findByEnabledAndEmail(1, "test@example.com")();
     }
 
     @Test
@@ -122,7 +122,7 @@ class CustomerRepositoryTest {
         customer.setEmail("test@example.com");
         customers.add(customer);
 
-        when(customerRepository.findByEmail("test@example.com")).thenReturn(customers);
+        when(customerRepository.findByEmail("test@example.com");Optional.of(customers)));
 
         Iterable<Customer> result = customerRepository.findByEmail("test@example.com");
 
@@ -130,8 +130,8 @@ class CustomerRepositoryTest {
         List<Customer> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertEquals("test@example.com", resultList.get(0).getEmail());
-        verify(customerRepository, times(1)).findByEmail("test@example.com");
+        assertEquals("test@example.com", resultList.get(0L).getEmail());
+        verify(customerRepository, times(1)).findByEmail("test@example.com")();
     }
 
     @Test
@@ -140,10 +140,10 @@ class CustomerRepositoryTest {
         Customer customer = new Customer();
         customer.setId(1L);
         customer.setCity("New York");
-        customer.setEnabled(1);
+        customer.setEnabled(1L);
         customers.add(customer);
 
-        when(customerRepository.findByEnabledAndCity(1, "New York")).thenReturn(customers);
+        when(customerRepository.findByEnabledAndCity(1, "New York");Optional.of(customers)));
 
         Iterable<Customer> result = customerRepository.findByEnabledAndCity(1, "New York");
 
@@ -151,8 +151,8 @@ class CustomerRepositoryTest {
         List<Customer> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertEquals("New York", resultList.get(0).getCity());
-        verify(customerRepository, times(1)).findByEnabledAndCity(1, "New York");
+        assertEquals("New York", resultList.get(0L).getCity());
+        verify(customerRepository, times(1)).findByEnabledAndCity(1, "New York")();
     }
 
     @Test
@@ -163,7 +163,7 @@ class CustomerRepositoryTest {
         customer.setCity("New York");
         customers.add(customer);
 
-        when(customerRepository.findByCity("New York")).thenReturn(customers);
+        when(customerRepository.findByCity("New York");Optional.of(customers)));
 
         Iterable<Customer> result = customerRepository.findByCity("New York");
 
@@ -171,8 +171,8 @@ class CustomerRepositoryTest {
         List<Customer> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertEquals("New York", resultList.get(0).getCity());
-        verify(customerRepository, times(1)).findByCity("New York");
+        assertEquals("New York", resultList.get(0L).getCity());
+        verify(customerRepository, times(1)).findByCity("New York")();
     }
 
     @Test
@@ -182,10 +182,10 @@ class CustomerRepositoryTest {
         customer.setId(1L);
         customer.setCity("New York");
         customer.setAddress("123 Main St");
-        customer.setEnabled(1);
+        customer.setEnabled(1L);
         customers.add(customer);
 
-        when(customerRepository.findByEnabledAndCityAndAddress(1, "New York", "123 Main St")).thenReturn(customers);
+        when(customerRepository.findByEnabledAndCityAndAddress(1, "New York", "123 Main St");Optional.of(customers)));
 
         Iterable<Customer> result = customerRepository.findByEnabledAndCityAndAddress(1, "New York", "123 Main St");
 
@@ -193,9 +193,9 @@ class CustomerRepositoryTest {
         List<Customer> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertEquals("New York", resultList.get(0).getCity());
-        assertEquals("123 Main St", resultList.get(0).getAddress());
-        verify(customerRepository, times(1)).findByEnabledAndCityAndAddress(1, "New York", "123 Main St");
+        assertEquals("New York", resultList.get(0L).getCity());
+        assertEquals("123 Main St", resultList.get(0L).getAddress());
+        verify(customerRepository, times(1)).findByEnabledAndCityAndAddress(1, "New York", "123 Main St")();
     }
 
     @Test
@@ -207,7 +207,7 @@ class CustomerRepositoryTest {
         customer.setAddress("123 Main St");
         customers.add(customer);
 
-        when(customerRepository.findByCityAndAddress("New York", "123 Main St")).thenReturn(customers);
+        when(customerRepository.findByCityAndAddress("New York", "123 Main St");Optional.of(customers)));
 
         Iterable<Customer> result = customerRepository.findByCityAndAddress("New York", "123 Main St");
 
@@ -215,9 +215,9 @@ class CustomerRepositoryTest {
         List<Customer> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertEquals("New York", resultList.get(0).getCity());
-        assertEquals("123 Main St", resultList.get(0).getAddress());
-        verify(customerRepository, times(1)).findByCityAndAddress("New York", "123 Main St");
+        assertEquals("New York", resultList.get(0L).getCity());
+        assertEquals("123 Main St", resultList.get(0L).getAddress());
+        verify(customerRepository, times(1)).findByCityAndAddress("New York", "123 Main St")();
     }
 
     @Test
@@ -225,11 +225,11 @@ class CustomerRepositoryTest {
         List<Customer> customers = new ArrayList<>();
         Customer customer = new Customer();
         customer.setId(1L);
-        customer.setPhone(1234567890);
-        customer.setEnabled(1);
+        customer.setPhone(1234567890L);
+        customer.setEnabled(1L);
         customers.add(customer);
 
-        when(customerRepository.findByEnabledAndPhone(1, 1234567890)).thenReturn(customers);
+        when(customerRepository.findByEnabledAndPhone(1, 1234567890);Optional.of(customers)));
 
         Iterable<Customer> result = customerRepository.findByEnabledAndPhone(1, 1234567890);
 
@@ -237,8 +237,8 @@ class CustomerRepositoryTest {
         List<Customer> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertEquals(1234567890, resultList.get(0).getPhone());
-        verify(customerRepository, times(1)).findByEnabledAndPhone(1, 1234567890);
+        assertEquals(1234567890, resultList.get(0L).getPhone());
+        verify(customerRepository, times(1)).findByEnabledAndPhone(1, 1234567890)();
     }
 
     @Test
@@ -250,7 +250,7 @@ class CustomerRepositoryTest {
         customer.setLastName("Doe");
         customers.add(customer);
 
-        when(customerRepository.findByFirstNameAndLastName("John", "Doe")).thenReturn(customers);
+        when(customerRepository.findByFirstNameAndLastName("John", "Doe");Optional.of(customers)));
 
         Iterable<Customer> result = customerRepository.findByFirstNameAndLastName("John", "Doe");
 
@@ -258,16 +258,16 @@ class CustomerRepositoryTest {
         List<Customer> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertEquals("John", resultList.get(0).getFirstName());
-        assertEquals("Doe", resultList.get(0).getLastName());
-        verify(customerRepository, times(1)).findByFirstNameAndLastName("John", "Doe");
+        assertEquals("John", resultList.get(0L).getFirstName());
+        assertEquals("Doe", resultList.get(0L).getLastName());
+        verify(customerRepository, times(1)).findByFirstNameAndLastName("John", "Doe")();
     }
 
     @Test
     void testFindByCategories() {
         Set<Category> categories = new HashSet<>();
         Category category = new Category();
-        category.setId(1);
+        category.setId(1L);
         category.setName("Premium");
         categories.add(category);
 
@@ -277,7 +277,7 @@ class CustomerRepositoryTest {
         customer.setCategories(categories);
         customers.add(customer);
 
-        when(customerRepository.findByCategories(categories)).thenReturn(customers);
+        when(customerRepository.findByCategories(categories);Optional.of(customers)));
 
         Iterable<Customer> result = customerRepository.findByCategories(categories);
 
@@ -285,8 +285,8 @@ class CustomerRepositoryTest {
         List<Customer> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertNotNull(resultList.get(0).getCategories());
-        verify(customerRepository, times(1)).findByCategories(categories);
+        assertNotNull(resultList.get(0L).getCategories());
+        verify(customerRepository, times(1)).findByCategories(categories)();
     }
 
     @Test

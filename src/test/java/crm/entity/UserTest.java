@@ -14,7 +14,7 @@ class UserTest {
     void setUp() {
         user = new User();
         role = new Role();
-        role.setId(1);
+        role.setId(1L);
         role.setName("ROLE_USER");
         user.setRole(role);
     }
@@ -33,7 +33,7 @@ class UserTest {
                 .email("test@test.com")
                 .firstName("Test")
                 .lastName("User")
-                .enabled(1)
+                .enabled(1L)
                 .build();
 
         assertNotNull(builtUser);
@@ -58,7 +58,7 @@ class UserTest {
         user.setFirstName("Test");
         user.setLastName("User");
         user.setPassword("password");
-        user.setEnabled(1);
+        user.setEnabled(1L);
 
         assertEquals(1L, user.getId());
         assertEquals("testuser", user.getUsername());

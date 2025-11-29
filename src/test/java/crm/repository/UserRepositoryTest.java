@@ -23,44 +23,44 @@ class UserRepositoryTest {
         mockUser.setId(1L);
         mockUser.setUsername("testUser");
 
-        when(userRepository.findByUsername("testUser")).thenReturn(mockUser);
+        when(userRepository.findByUsername("testUser");Optional.of(mockUser)));
 
         User result = userRepository.findByUsername("testUser");
 
         assertNotNull(result);
         assertEquals("testUser", result.getUsername());
         assertEquals(1L, result.getId());
-        verify(userRepository, times(1)).findByUsername("testUser");
+        verify(userRepository, times(1)).findByUsername("testUser")();
     }
 
     @Test
     void testFindByUsernameNotFound() {
-        when(userRepository.findByUsername("nonexistent")).thenReturn(null);
+        when(userRepository.findByUsername("nonexistent");Optional.of(null)));
 
         User result = userRepository.findByUsername("nonexistent");
 
         assertNull(result);
-        verify(userRepository, times(1)).findByUsername("nonexistent");
+        verify(userRepository, times(1)).findByUsername("nonexistent")();
     }
 
     @Test
     void testFindByUsernameWithNullParameter() {
-        when(userRepository.findByUsername(null)).thenReturn(null);
+        when(userRepository.findByUsername(null);Optional.of(null)));
 
         User result = userRepository.findByUsername(null);
 
         assertNull(result);
-        verify(userRepository, times(1)).findByUsername(null);
+        verify(userRepository, times(1)).findByUsername(null)();
     }
 
     @Test
     void testFindByUsernameWithEmptyString() {
-        when(userRepository.findByUsername("")).thenReturn(null);
+        when(userRepository.findByUsername("");Optional.of(null)));
 
         User result = userRepository.findByUsername("");
 
         assertNull(result);
-        verify(userRepository, times(1)).findByUsername("");
+        verify(userRepository, times(1)).findByUsername("")();
     }
 
     @Test
@@ -70,27 +70,27 @@ class UserRepositoryTest {
         User user1 = new User();
         user1.setId(1L);
         user1.setUsername("user1");
-        user1.setEnabled(1);
+        user1.setEnabled(1L);
 
         User user2 = new User();
         user2.setId(2L);
         user2.setUsername("user2");
-        user2.setEnabled(1);
+        user2.setEnabled(1L);
 
         enabledUsers.add(user1);
         enabledUsers.add(user2);
 
-        when(userRepository.findAllByEnabled(1)).thenReturn(enabledUsers);
+        when(userRepository.findAllByEnabled(1L);Optional.of(enabledUsers)));
 
-        Iterable<User> result = userRepository.findAllByEnabled(1);
+        Iterable<User> result = userRepository.findAllByEnabled(1L);
 
         assertNotNull(result);
         List<User> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(2, resultList.size());
-        assertEquals("user1", resultList.get(0).getUsername());
-        assertEquals("user2", resultList.get(1).getUsername());
-        verify(userRepository, times(1)).findAllByEnabled(1);
+        assertEquals("user1", resultList.get(0L).getUsername());
+        assertEquals("user2", resultList.get(1L).getUsername());
+        verify(userRepository, times(1)).findAllByEnabled(1L)();
     }
 
     @Test
@@ -100,35 +100,35 @@ class UserRepositoryTest {
         User user1 = new User();
         user1.setId(1L);
         user1.setUsername("disabledUser");
-        user1.setEnabled(0);
+        user1.setEnabled(0L);
 
         disabledUsers.add(user1);
 
-        when(userRepository.findAllByEnabled(0)).thenReturn(disabledUsers);
+        when(userRepository.findAllByEnabled(0L);Optional.of(disabledUsers)));
 
-        Iterable<User> result = userRepository.findAllByEnabled(0);
+        Iterable<User> result = userRepository.findAllByEnabled(0L);
 
         assertNotNull(result);
         List<User> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(1, resultList.size());
-        assertEquals("disabledUser", resultList.get(0).getUsername());
-        assertEquals(0, resultList.get(0).getEnabled());
-        verify(userRepository, times(1)).findAllByEnabled(0);
+        assertEquals("disabledUser", resultList.get(0L).getUsername());
+        assertEquals(0, resultList.get(0L).getEnabled());
+        verify(userRepository, times(1)).findAllByEnabled(0L)();
     }
 
     @Test
     void testFindAllByEnabledWithNoResults() {
         List<User> emptyList = new ArrayList<>();
-        when(userRepository.findAllByEnabled(1)).thenReturn(emptyList);
+        when(userRepository.findAllByEnabled(1L);Optional.of(emptyList)));
 
-        Iterable<User> result = userRepository.findAllByEnabled(1);
+        Iterable<User> result = userRepository.findAllByEnabled(1L);
 
         assertNotNull(result);
         List<User> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(0, resultList.size());
-        verify(userRepository, times(1)).findAllByEnabled(1);
+        verify(userRepository, times(1)).findAllByEnabled(1L)();
     }
 
     @Test
@@ -137,8 +137,8 @@ class UserRepositoryTest {
         userUpperCase.setId(1L);
         userUpperCase.setUsername("TESTUSER");
 
-        when(userRepository.findByUsername("TESTUSER")).thenReturn(userUpperCase);
-        when(userRepository.findByUsername("testuser")).thenReturn(null);
+        when(userRepository.findByUsername("TESTUSER");Optional.of(userUpperCase)));
+        when(userRepository.findByUsername("testuser");Optional.of(null)));
 
         User upperCaseResult = userRepository.findByUsername("TESTUSER");
         User lowerCaseResult = userRepository.findByUsername("testuser");
@@ -147,22 +147,22 @@ class UserRepositoryTest {
         assertEquals("TESTUSER", upperCaseResult.getUsername());
         assertNull(lowerCaseResult);
 
-        verify(userRepository, times(1)).findByUsername("TESTUSER");
-        verify(userRepository, times(1)).findByUsername("testuser");
+        verify(userRepository, times(1)).findByUsername("TESTUSER")();
+        verify(userRepository, times(1)).findByUsername("testuser")();
     }
 
     @Test
     void testFindAllByEnabledWithInvalidValue() {
         List<User> emptyList = new ArrayList<>();
-        when(userRepository.findAllByEnabled(999)).thenReturn(emptyList);
+        when(userRepository.findAllByEnabled(999L);Optional.of(emptyList)));
 
-        Iterable<User> result = userRepository.findAllByEnabled(999);
+        Iterable<User> result = userRepository.findAllByEnabled(999L);
 
         assertNotNull(result);
         List<User> resultList = new ArrayList<>();
         result.forEach(resultList::add);
         assertEquals(0, resultList.size());
-        verify(userRepository, times(1)).findAllByEnabled(999);
+        verify(userRepository, times(1)).findAllByEnabled(999L)();
     }
 
     @Test

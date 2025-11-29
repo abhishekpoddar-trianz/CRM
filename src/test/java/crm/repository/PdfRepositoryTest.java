@@ -20,44 +20,44 @@ class PdfRepositoryTest {
         mockPdf.setId(1L);
         mockPdf.setName("test.pdf");
 
-        when(pdfRepository.findByName("test.pdf")).thenReturn(mockPdf);
+        when(pdfRepository.findByName("test.pdf");Optional.of(mockPdf)));
 
         Pdf result = pdfRepository.findByName("test.pdf");
 
         assertNotNull(result);
         assertEquals("test.pdf", result.getName());
         assertEquals(1L, result.getId());
-        verify(pdfRepository, times(1)).findByName("test.pdf");
+        verify(pdfRepository, times(1)).findByName("test.pdf")();
     }
 
     @Test
     void testFindByNameNotFound() {
-        when(pdfRepository.findByName("nonexistent.pdf")).thenReturn(null);
+        when(pdfRepository.findByName("nonexistent.pdf");Optional.of(null)));
 
         Pdf result = pdfRepository.findByName("nonexistent.pdf");
 
         assertNull(result);
-        verify(pdfRepository, times(1)).findByName("nonexistent.pdf");
+        verify(pdfRepository, times(1)).findByName("nonexistent.pdf")();
     }
 
     @Test
     void testFindByNameWithNullParameter() {
-        when(pdfRepository.findByName(null)).thenReturn(null);
+        when(pdfRepository.findByName(null);Optional.of(null)));
 
         Pdf result = pdfRepository.findByName(null);
 
         assertNull(result);
-        verify(pdfRepository, times(1)).findByName(null);
+        verify(pdfRepository, times(1)).findByName(null)();
     }
 
     @Test
     void testFindByNameWithEmptyString() {
-        when(pdfRepository.findByName("")).thenReturn(null);
+        when(pdfRepository.findByName("");Optional.of(null)));
 
         Pdf result = pdfRepository.findByName("");
 
         assertNull(result);
-        verify(pdfRepository, times(1)).findByName("");
+        verify(pdfRepository, times(1)).findByName("")();
     }
 
     @Test
@@ -66,8 +66,8 @@ class PdfRepositoryTest {
         pdfUpperCase.setId(1L);
         pdfUpperCase.setName("TEST.PDF");
 
-        when(pdfRepository.findByName("TEST.PDF")).thenReturn(pdfUpperCase);
-        when(pdfRepository.findByName("test.pdf")).thenReturn(null);
+        when(pdfRepository.findByName("TEST.PDF");Optional.of(pdfUpperCase)));
+        when(pdfRepository.findByName("test.pdf");Optional.of(null)));
 
         Pdf upperCaseResult = pdfRepository.findByName("TEST.PDF");
         Pdf lowerCaseResult = pdfRepository.findByName("test.pdf");
@@ -76,8 +76,8 @@ class PdfRepositoryTest {
         assertEquals("TEST.PDF", upperCaseResult.getName());
         assertNull(lowerCaseResult);
 
-        verify(pdfRepository, times(1)).findByName("TEST.PDF");
-        verify(pdfRepository, times(1)).findByName("test.pdf");
+        verify(pdfRepository, times(1)).findByName("TEST.PDF")();
+        verify(pdfRepository, times(1)).findByName("test.pdf")();
     }
 
     @Test
@@ -90,8 +90,8 @@ class PdfRepositoryTest {
         pdf2.setId(2L);
         pdf2.setName("document2.pdf");
 
-        when(pdfRepository.findByName("document1.pdf")).thenReturn(pdf1);
-        when(pdfRepository.findByName("document2.pdf")).thenReturn(pdf2);
+        when(pdfRepository.findByName("document1.pdf");Optional.of(pdf1)));
+        when(pdfRepository.findByName("document2.pdf");Optional.of(pdf2)));
 
         Pdf result1 = pdfRepository.findByName("document1.pdf");
         Pdf result2 = pdfRepository.findByName("document2.pdf");
@@ -102,8 +102,8 @@ class PdfRepositoryTest {
         assertEquals("document2.pdf", result2.getName());
         assertNotEquals(result1.getId(), result2.getId());
 
-        verify(pdfRepository, times(1)).findByName("document1.pdf");
-        verify(pdfRepository, times(1)).findByName("document2.pdf");
+        verify(pdfRepository, times(1)).findByName("document1.pdf")();
+        verify(pdfRepository, times(1)).findByName("document2.pdf")();
     }
 
     @Test
@@ -112,13 +112,13 @@ class PdfRepositoryTest {
         pdfSpecial.setId(1L);
         pdfSpecial.setName("test-file_v1.0.pdf");
 
-        when(pdfRepository.findByName("test-file_v1.0.pdf")).thenReturn(pdfSpecial);
+        when(pdfRepository.findByName("test-file_v1.0.pdf");Optional.of(pdfSpecial)));
 
         Pdf result = pdfRepository.findByName("test-file_v1.0.pdf");
 
         assertNotNull(result);
         assertEquals("test-file_v1.0.pdf", result.getName());
-        verify(pdfRepository, times(1)).findByName("test-file_v1.0.pdf");
+        verify(pdfRepository, times(1)).findByName("test-file_v1.0.pdf")();
     }
 
     @Test
