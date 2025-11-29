@@ -5,6 +5,8 @@ import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvException;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import crm.entity.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +23,6 @@ public class WriteCsvToResponse {
             ColumnPositionMappingStrategy columnPositionMappingStrategy = new ColumnPositionMappingStrategy();
 
             columnPositionMappingStrategy.setType(Customer.class);
-            columnPositionMappingStrategy.generateHeader();
 
             String[] columns = new String[]{"id", "name", "email", "phone", "firstName", "lastName", "city", "address", "enabled"};
             columnPositionMappingStrategy.setColumnMapping(columns);
@@ -33,7 +34,7 @@ public class WriteCsvToResponse {
                     .build();
 
             statefulBeanToCsv.write(customers);
-        } catch (CsvException ex) {
+        } catch (CsvDataTypeMismatchException | CsvRequiredFieldEmptyException ex) {
             LOGGER.error("Error mapping Bean to CSV", ex);
         }
     }
@@ -54,7 +55,7 @@ public class WriteCsvToResponse {
                     .build();
 
             statefulBeanToCsv.write(customer);
-        } catch (CsvException ex) {
+        } catch (CsvDataTypeMismatchException | CsvRequiredFieldEmptyException ex) {
             LOGGER.error("Error mapping Bean to CSV", ex);
         }
     }
