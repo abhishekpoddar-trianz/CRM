@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.dialect.springdata.SpringDataDialect;
+// import org.thymeleaf.dialect.springdata.SpringDataDialect;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring6.SpringTemplateEngine;
@@ -156,9 +156,9 @@ public class WebAppConfig implements WebMvcConfigurer {
         return new PdfViewResolver();
     }
 
-    @Bean
-    public SpringDataDialect springDataDialect() {
-        return new SpringDataDialect();
-    }
+    // @Bean
+    // public SpringDataDialect springDataDialect() {
+    //     return new SpringDataDialect();
+    // }
 
 }
