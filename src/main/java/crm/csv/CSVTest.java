@@ -1,6 +1,7 @@
 package crm.csv;
 
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import crm.utils.ReadDataUtils;
 
 import java.io.File;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class CSVTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CsvValidationException {
         File document = ReadDataUtils.ReadFile("Select CSV file", null, "Only CSV Files", "csv");
 //        System.out.println(document.getName());
 
