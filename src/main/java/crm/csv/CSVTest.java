@@ -3,6 +3,7 @@ package crm.csv;
 import com.opencsv.CSVReader;
 import crm.utils.ReadDataUtils;
 
+import com.opencsv.exceptions.CsvValidationException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class CSVTest {
                 }
 
             }
-        } catch (IOException e) {
+        } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
 		/*System.out.println(data.get(0)[1] + "\t" + data.get(0)[2]);

@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
+import com.opencsv.exceptions.CsvValidationException;
 import java.io.IOException;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class CSVController {
 //                    }
                 }
                 model.addAttribute("data", data);
-            } catch (IOException e) {
+            } catch (IOException | CsvValidationException e) {
                 e.printStackTrace();
             }
 		*//*System.out.println(data.get(0)[1] + "\t" + data.get(0)[2]);
