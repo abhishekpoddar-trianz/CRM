@@ -47,8 +47,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-        configurer.favorPathExtension(false)
-                .ignoreAcceptHeader(false)
+        configurer.ignoreAcceptHeader(false)
                 .defaultContentType(MediaType.APPLICATION_JSON);
 
         final Map<String,MediaType> mediaTypes = new HashMap<>();
@@ -110,7 +109,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 
-        viewResolver.setTemplateEngine(templateEngine(templateResolver()));
+        viewResolver.setTemplateEngine((SpringTemplateEngine) templateEngine(templateResolver()));
         viewResolver.setCharacterEncoding("UTF-8");
 
         return viewResolver;
