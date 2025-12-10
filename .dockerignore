@@ -1,0 +1,44 @@
+# Maven
+target/
+.mvn/
+mvnw
+mvnw.cmd
+
+# Gradle
+build/
+.gradle/
+gradlew
+gradlew.bat
+gradle/wrapper/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+*.md
+README*
+
+# Logs
+*.log
+logs/
+
+# Test
+.pytest_cache/
+.coverage
+
+# Docker
+.dockerignore
+Dockerfile*
+docker-compose*
