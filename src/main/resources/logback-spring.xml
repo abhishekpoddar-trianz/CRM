@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProfile name="!cloud">
+        <!-- Console appender for local development -->
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{ISO8601} [%thread] %-5level %logger{36} [%X{correlationId:-}] - %msg%n</pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <springProfile name="cloud">
+        <!-- JSON structured logging for cloud environments -->
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                <providers>
+                    <timestamp/>
+                    <logLevel/>
+                    <loggerName/>
+                    <mdc/>
+                    <arguments/>
+                    <message/>
+                    <stackTrace/>
+                </providers>
+                <jsonFactoryDecorator class="net.logstash.logback.decorate.CompositeJsonFactoryDecorator">
+                    <decorators>
+                        <decorator class="net.logstash.logback.decorate.PrettyPrintingJsonFactoryDecorator"/>
+                    </decorators>
+                </jsonFactoryDecorator>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <!-- File appender for production environments -->
+    <springProfile name="prod">
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>logs/crm-application.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>logs/crm-application.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                <maxFileSize>100MB</maxFileSize>
+                <maxHistory>30</maxHistory>
+                <totalSizeCap>3GB</totalSizeCap>
+            </rollingPolicy>
+            <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                <providers>
+                    <timestamp/>
+                    <logLevel/>
+                    <loggerName/>
+                    <mdc/>
+                    <arguments/>
+                    <message/>
+                    <stackTrace/>
+                </providers>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <!-- Async appender for better performance -->
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="STDOUT"/>
+        <queueSize>512</queueSize>
+        <discardingThreshold>20</discardingThreshold>
+        <maxFlushTime>1000</maxFlushTime>
+        <includeCallerData>false</includeCallerData>
+    </appender>
+
+    <!-- Logger configuration -->
+    <logger name="crm" level="${LOG_LEVEL:-INFO}" additivity="false">
+        <appender-ref ref="ASYNC"/>
+    </logger>
+
+    <logger name="software.amazon.awssdk" level="WARN" additivity="false">
+        <appender-ref ref="ASYNC"/>
+    </logger>
+
+    <logger name="com.zaxxer.hikari" level="WARN" additivity="false">
+        <appender-ref ref="ASYNC"/>
+    </logger>
+
+    <logger name="org.springframework.security" level="WARN" additivity="false">
+        <appender-ref ref="ASYNC"/>
+    </logger>
+
+    <logger name="org.hibernate" level="WARN" additivity="false">
+        <appender-ref ref="ASYNC"/>
+    </logger>
+
+    <logger name="org.springframework.web" level="INFO" additivity="false">
+        <appender-ref ref="ASYNC"/>
+    </logger>
+
+    <!-- Health check endpoint logging -->
+    <logger name="org.springframework.boot.actuate.health" level="WARN" additivity="false">
+        <appender-ref ref="ASYNC"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="ASYNC"/>
+    </root>
+
+    <!-- Shutdown hook for graceful logging shutdown -->
+    <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
+</configuration>
