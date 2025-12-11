@@ -32,7 +32,11 @@ public class PdfController {
             fileName += ".pdf";
         }
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(fileName));
+        String outputPath = System.getenv("PDF_OUTPUT_PATH");
+        if (outputPath == null) {
+            outputPath = "/data/pdfs";
+        }
+        PdfWriter.getInstance(document, new FileOutputStream(outputPath + "/" + fileName));
         document.open();
         Paragraph paragraph = new Paragraph(text);
         document.add(paragraph);
