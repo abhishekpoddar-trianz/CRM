@@ -2,6 +2,7 @@ package crm.service;
 
 import crm.entity.CurrentUser;
 import crm.entity.User;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,6 +17,7 @@ import java.util.Set;
 @Service
 public class SpringDataUserDetailsService implements UserDetailsService {
 
+    @Lazy
     @Autowired
     UserService userService;
 
