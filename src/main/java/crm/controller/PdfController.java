@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
@@ -31,12 +32,22 @@ public class PdfController {
         if (!fileName.endsWith(".pdf")) {
             fileName += ".pdf";
         }
+        String pdfStoragePath = System.getenv("PDF_STORAGE_PATH");
+        if (pdfStoragePath == null || pdfStoragePath.isEmpty()) {
+            pdfStoragePath = System.getProperty("user.dir");
+        }
+        File storageDir = new File(pdfStoragePath);
+        if (!storageDir.exists()) {
+            storageDir.mkdirs();
+        }
+        String fullPath = new File(storageDir, fileName).getAbsolutePath();
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(fileName));
+        PdfWriter.getInstance(document, new FileOutputStream(fullPath));
         document.open();
         Paragraph paragraph = new Paragraph(text);
         document.add(paragraph);
         document.close();
+        log.info("PDF generated at: {}", fullPath);
     }
 
     @GetMapping("/pdf-generator")
