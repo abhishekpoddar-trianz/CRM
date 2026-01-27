@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  crm-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: crm-app:latest
+    container_name: crm-application
+    ports:
+      - "8080:8080"
+    environment:
+      - JAVA_OPTS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=docker
+      - DB_HOST=your-database-host
+      - DB_PORT=3306
+      - DB_NAME=crm
+      - DB_USERNAME=your-db-username
+      - DB_PASSWORD=your-db-password
+    volumes:
+      - ./logs:/app/logs
+      - ./config:/app/config
+    networks:
+      - crm-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "java", "-cp", "/app/app.jar", "org.springframework.boot.loader.JarLauncher", "--spring.main.web-application-type=none", "--spring.jpa.hibernate.ddl-auto=validate", "--logging.level.root=error", "--spring.main.sources=crm.CrmApplication"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+networks:
+  crm-network:
+    driver: bridge
+
+volumes:
+  logs:
+  config:

@@ -16,12 +16,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import org.springframework.beans.factory.annotation.Value;
 
 @Controller
 @Slf4j
 public class PdfController {
 
     private PdfService pdfService;
+
+    @Value("${pdf.output.directory:/tmp/pdfs}")
+    private String pdfOutputDirectory;
 
     public PdfController(PdfService pdfService) {
         this.pdfService = pdfService;
@@ -32,7 +36,8 @@ public class PdfController {
             fileName += ".pdf";
         }
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(fileName));
+        String fullPath = pdfOutputDirectory + "/" + fileName;
+        PdfWriter.getInstance(document, new FileOutputStream(fullPath));
         document.open();
         Paragraph paragraph = new Paragraph(text);
         document.add(paragraph);
